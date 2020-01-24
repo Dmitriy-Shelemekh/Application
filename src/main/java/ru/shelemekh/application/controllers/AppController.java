@@ -2,12 +2,14 @@ package ru.shelemekh.application.controllers;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.shelemekh.application.model.Message;
+import ru.shelemekh.application.model.User;
 import ru.shelemekh.application.repository.MessageRepository;
 
 import java.util.Map;
@@ -28,11 +30,12 @@ public class AppController {
 
 	@PostMapping("/app")
 	public String addMessages(
+			@AuthenticationPrincipal User user,
 			@RequestParam String text,
 			@RequestParam String tag,
 			Map<String, Object> model) {
 
-		Message message = new Message(text, tag);
+		Message message = new Message(text, tag, user);
 		Message message2 = new Message();
 		messageRepository.save(message);
 		Iterable<Message> messages = messageRepository.findAll();
