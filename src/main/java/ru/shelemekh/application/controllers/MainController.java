@@ -11,6 +11,6 @@ import java.util.Map;
 public class MainController {
     @GetMapping("/")
     public String  main(Map<String, Object> model) {
-        return "MainPage.mustache";
+        return "MainPage";
     }
 }

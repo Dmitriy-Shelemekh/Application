@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 	@GetMapping("/login")
 	public String login() {
-		return "LoginPage.mustache";
+		return "LoginPage";
 	}
 
 	@PostMapping("/logout")
 	public String logout() {
-		return "MainPage.mustache";
+		return "MainPage";
 	}
 }

@@ -23,7 +23,7 @@ public class AppController {
 		Iterable<Message> messages = messageRepository.findAll();
 		model.put("messages", messages);
 
-		return "AppPage.mustache";
+		return "AppPage";
 	}
 
 	@PostMapping("/app")
@@ -38,7 +38,7 @@ public class AppController {
 		Iterable<Message> messages = messageRepository.findAll();
 		model.put("messages", messages);
 
-		return "AppPage.mustache";
+		return "AppPage";
 	}
 
 	@PostMapping("/filter")
@@ -56,6 +56,6 @@ public class AppController {
 
 		model.put("messages", messages);
 
-		return "AppPage.mustache";
+		return "AppPage";
 	}
 }
