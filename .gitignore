@@ -7,3 +7,4 @@ target/
 *.ipr
 /mvnw
 /mvnw.cmd
+/.mvn/wrapper/
