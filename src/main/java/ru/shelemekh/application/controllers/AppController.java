@@ -36,7 +36,6 @@ public class AppController {
 			Map<String, Object> model) {
 
 		Message message = new Message(text, tag, user);
-		Message message2 = new Message();
 		messageRepository.save(message);
 		Iterable<Message> messages = messageRepository.findAll();
 		model.put("messages", messages);
