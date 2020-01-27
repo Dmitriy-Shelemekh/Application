@@ -43,6 +43,10 @@ public class AppController {
 		return "AppPage";
 	}
 
+	protected void deleteLastMessage() {
+		messageRepository.delete(messageRepository.findTopByOrderByIdDesc());
+	}
+
 	@PostMapping("/filter")
 	public String filterMessages(
 			@RequestParam String filter,

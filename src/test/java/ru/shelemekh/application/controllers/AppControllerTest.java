@@ -71,6 +71,7 @@ public class AppControllerTest {
 
         assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model));
 
+        appController.deleteLastMessage();
     }
 
     @Test
