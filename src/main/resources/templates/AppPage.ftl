@@ -20,7 +20,7 @@
 
     <form method="get" action="/app">
         <label>
-            <input type="text" name="filter"/>
+            <input type="text" name="filter" value="${filter}"/>
             <button type="submit">Найти</button>
         </label>
     </form>

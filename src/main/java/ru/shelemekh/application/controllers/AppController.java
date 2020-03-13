@@ -22,7 +22,7 @@ public class AppController {
 
 	@GetMapping("/app")
 	public String getMessages(
-			@RequestParam(required = false) String filter,
+			@RequestParam(required = false, defaultValue = "") String filter,
 			Map<String, Object> model) {
 		Iterable<Message> messages = messageRepository.findAll();
 
