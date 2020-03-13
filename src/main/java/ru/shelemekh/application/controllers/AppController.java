@@ -21,9 +21,19 @@ public class AppController {
 	private MessageRepository messageRepository;
 
 	@GetMapping("/app")
-	public String getMessages(Map<String, Object> model) {
+	public String getMessages(
+			@RequestParam(required = false) String filter,
+			Map<String, Object> model) {
 		Iterable<Message> messages = messageRepository.findAll();
+
+		if (StringUtils.isNotEmpty(filter)) {
+			messages = messageRepository.findByTag(filter);
+		} else {
+			messages = messageRepository.findAll();
+		}
+
 		model.put("messages", messages);
+		model.put("filter", filter);
 
 		return "AppPage";
 	}
@@ -34,7 +44,6 @@ public class AppController {
 			@RequestParam String text,
 			@RequestParam String tag,
 			Map<String, Object> model) {
-
 		Message message = new Message(text, tag, user);
 		messageRepository.save(message);
 		Iterable<Message> messages = messageRepository.findAll();
@@ -47,21 +56,18 @@ public class AppController {
 		messageRepository.delete(messageRepository.findTopByOrderByIdDesc());
 	}
 
-	@PostMapping("/filter")
-	public String filterMessages(
-			@RequestParam String filter,
-			Map<String, Object> model) {
-
-		Iterable<Message> messages;
-
-		if (StringUtils.isNotEmpty(filter)) {
-			messages = messageRepository.findByTag(filter);
-		} else {
-			messages = messageRepository.findAll();
-		}
-
-		model.put("messages", messages);
-
-		return "AppPage";
-	}
+//	@PostMapping("/filter")
+//	public String filterMessages(
+//			@RequestParam String filter,
+//			Map<String, Object> model)
+//	{
+//		Iterable<Message> messages;
+//		if (StringUtils.isNotEmpty(filter)) {
+//			messages = messageRepository.findByTag(filter);
+//		} else {
+//			messages = messageRepository.findAll();
+//		}
+//		model.put("messages", messages);
+//		return "AppPage";
+//	}
 }

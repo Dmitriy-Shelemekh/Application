@@ -58,7 +58,7 @@ public class AppControllerTest {
         assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model));
 
         Mockito.when(messageRepository.findByTag(tag)).thenReturn(messageList);
-        appController.getMessages(model);
+        appController.getMessages(filter, model);
 
         assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model));
     }
@@ -76,13 +76,13 @@ public class AppControllerTest {
 
     @Test
     public void filterMessages() {
-        appController.filterMessages(filter, model);
+        appController.getMessages(filter, model);
 
         assertEquals("В модели не должно быть сообщений с тегом '" + tag + "'", 0, getMessageCount(model));
 
         filter = tag;
 
-        appController.filterMessages(filter, model);
+        appController.getMessages(filter, model);
 
         assertEquals("", 0, getMessageCount(model));
     }
