@@ -2,11 +2,10 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-    <body>
     <div><@l.logout /></div>
 
     <div>
-        <form method="post">
+        <form method="post" action="/app">
             <label>
                 <input type="text" name="text" placeholder="Введите сообщение"/>
                 <input type="text" name="tag" placeholder="Тег"/>
@@ -17,10 +16,9 @@
     </div>
 
     <div>Список сообщений</div>
-
     <form method="get" action="/app">
         <label>
-            <input type="text" name="filter" value="${filter}"/>
+            <input type="text" name="filter" value="${filter!}"/>
             <button type="submit">Найти</button>
         </label>
     </form>

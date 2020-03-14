@@ -2,6 +2,7 @@ package ru.shelemekh.application.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.shelemekh.application.model.Role;
@@ -9,7 +10,6 @@ import ru.shelemekh.application.model.User;
 import ru.shelemekh.application.repository.UserRepository;
 
 import java.util.Collections;
-import java.util.Map;
 
 @Controller
 public class RegistrationController {
@@ -22,11 +22,11 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(User user, Map<String, Object> model) {
+    public String addUser(User user, Model model) {
         User foundUser = userRepository.findByUsername(user.getUsername());
 
         if (foundUser != null) {
-            model.put("message", "User Exist");
+            model.addAttribute("message", "User Exist");
             return "RegistrationPage";
         }
 

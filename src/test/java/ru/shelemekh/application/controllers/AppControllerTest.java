@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ui.Model;
 import ru.shelemekh.application.model.Message;
 import ru.shelemekh.application.model.Role;
 import ru.shelemekh.application.model.User;
@@ -28,7 +29,7 @@ public class AppControllerTest {
     @Autowired
     private MessageRepository messageRepository;
 
-    private Map<String, Object> model;
+    private Model model;
     private User user;
     private String filter;
     private String tag;
@@ -37,7 +38,7 @@ public class AppControllerTest {
 
     @Before
     public void setUp() {
-        model = new HashMap<>();
+        model = Mockito.mock(Model.class);
         tag = "Tag";
         filter = "Filter";
         messageText = "MessageText";
@@ -55,21 +56,21 @@ public class AppControllerTest {
 
     @Test
     public void getMessages() {
-        assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model));
+        assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model.asMap()));
 
         Mockito.when(messageRepository.findByTag(tag)).thenReturn(messageList);
         appController.getMessages(filter, model);
 
-        assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model));
+        assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model.asMap()));
     }
 
     @Test
     public void addMessages() {
-        assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model));
+        assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model.asMap()));
 
         appController.addMessages(user, messageText, tag, model);
 
-        assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model));
+        assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model.asMap()));
 
         appController.deleteLastMessage();
     }
@@ -78,13 +79,13 @@ public class AppControllerTest {
     public void filterMessages() {
         appController.getMessages(filter, model);
 
-        assertEquals("В модели не должно быть сообщений с тегом '" + tag + "'", 0, getMessageCount(model));
+        assertEquals("В модели не должно быть сообщений с тегом '" + tag + "'", 0, getMessageCount(model.asMap()));
 
         filter = tag;
 
         appController.getMessages(filter, model);
 
-        assertEquals("", 0, getMessageCount(model));
+        assertEquals("", 0, getMessageCount(model.asMap()));
     }
 
     private int getMessageCount(Map<String, Object> model) {
