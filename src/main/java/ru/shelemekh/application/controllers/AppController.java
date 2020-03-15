@@ -22,8 +22,8 @@ public class AppController {
     @GetMapping
     public String getMessages(
             @RequestParam(required = false, defaultValue = "") String filter,
-            Model model)
-	{
+            Model model
+    ) {
         Iterable<Message> messages = messageRepository.findAll();
 
         if (StringUtils.isNotEmpty(filter)) {
@@ -43,8 +43,8 @@ public class AppController {
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag,
-            Model model)
-	{
+            Model model
+    ) {
         Message message = new Message(text, tag, user);
         messageRepository.save(message);
         Iterable<Message> messages = messageRepository.findAll();
