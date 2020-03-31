@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import ru.shelemekh.application.model.Message;
 import ru.shelemekh.application.model.Role;
 import ru.shelemekh.application.model.User;
 import ru.shelemekh.application.repository.MessageRepository;
 
+import java.io.IOException;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -65,10 +67,11 @@ public class AppControllerTest {
     }
 
     @Test
-    public void addMessages() {
+    public void addMessages() throws IOException {
         assertTrue("Перед началом теста модель дожна быть пустой", MapUtils.isEmpty(model.asMap()));
 
-        appController.addMessages(user, messageText, tag, model);
+        MultipartFile file = Mockito.mock(MultipartFile.class);
+        appController.addMessages(user, messageText, tag, model, file);
 
         assertTrue("В модели должны быть сообщения", MapUtils.isNotEmpty(model.asMap()));
 
