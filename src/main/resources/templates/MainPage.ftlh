@@ -1,8 +1,6 @@
 <#import "parts/common.ftlh" as c>
-<#import "parts/login.ftlh" as l>
 
 <@c.page>
-    <div>Hello, user</div>
-    <a href="/app">App page</a>
-    <div><@l.logout /></div>
+    <h4>Hello, user</h4>
+    <div>This is my test application on SpringBoot. Have fun!</div>
 </@c.page>
