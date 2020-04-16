@@ -4,7 +4,7 @@
     User Editor
     <form action="/user" method="post">
         <div class="form-group">
-            <input class="form-control mt-3" type="text" name="username" value="${user.username}">
+            <input class="form-control col-sm-5 mt-3" type="text" name="username" value="${user.username}">
             <small class="form-text text-muted mb-3">User name.</small>
             <#list roles as role>
                 <div>

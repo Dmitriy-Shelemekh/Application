@@ -16,7 +16,7 @@
                 <td class="text-center">${user.username!}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
                 <td>
-                    <a href="/user/${user.id}" class="text-center btn-primary btn-block">Edit</a></td>
+                    <a href="/user/${user.id}" class="text-center btn btn-primary btn-block">Edit</a></td>
             </tr>
         </#list>
         </tbody>
