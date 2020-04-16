@@ -2,21 +2,21 @@
 
 <@c.page>
     Users:
-    <table>
+    <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Role</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Role</th>
             <th></th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="table-hover">
         <#list users as user>
             <tr>
-                <td>${user.username!}</td>
+                <td class="text-center">${user.username!}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
                 <td>
-                    <a href="/user/${user.id}">edit</a></td>
+                    <a href="/user/${user.id}" class="text-center btn-primary btn-block">Edit</a></td>
             </tr>
         </#list>
         </tbody>
