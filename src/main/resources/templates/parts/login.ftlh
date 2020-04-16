@@ -22,9 +22,9 @@
     </form>
 </#macro>
 
-<#macro logout>
+<#macro logout name>
     <form action="/logout" method="post">
-        <button class="btn btn-primary" type="submit">Sign Out</button>
+        <button class="btn btn-primary" type="submit"><#if name == 'unknown'>Sign In<#else>Sign Out</#if></button>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
 </#macro>
