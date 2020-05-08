@@ -28,6 +28,9 @@ public class MailConfig {
     @Value("${mail.debug}")
     private String debug;
 
+    @Value("${mail.smtp.auth}")
+    private String auth;
+
     @Bean
     public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -40,6 +43,7 @@ public class MailConfig {
         Properties properties = mailSender.getJavaMailProperties();
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.debug", debug);
+        properties.setProperty("mail.smtp.auth", auth);
 
         return mailSender;
     }

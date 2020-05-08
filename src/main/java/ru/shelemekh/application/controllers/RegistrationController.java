@@ -6,22 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.shelemekh.application.model.User;
 import ru.shelemekh.application.service.UserService;
 
 @Controller
-@RequestMapping("/registration")
 public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/registration")
     public String registration() {
         return "RegistrationPage";
     }
 
-    @PostMapping
+    @PostMapping("/registration")
     public String addUser(User user, Model model) {
         if (!userService.addUser(user)) {
             model.addAttribute("message", "User Exist");
