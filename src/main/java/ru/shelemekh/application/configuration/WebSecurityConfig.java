@@ -1,4 +1,4 @@
-package ru.shelemekh.application;
+package ru.shelemekh.application.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/", "/registration", "/static/**").permitAll()
+                .antMatchers(
+                        "/", "/registration", "/static/**", "/activate/*").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

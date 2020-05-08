@@ -1,4 +1,4 @@
-package ru.shelemekh.application;
+package ru.shelemekh.application.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
